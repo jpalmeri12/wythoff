@@ -1,0 +1,505 @@
+@font-face {
+    font-family: "FuturaBook";
+    src: url("fonts/FuturaPTBook.otf");
+}
+
+@font-face {
+    font-family: "FuturaMedium";
+    src: url("fonts/FuturaPTMedium.otf");
+}
+
+@font-face {
+    font-family: "FuturaDemi";
+    src: url("fonts/FuturaPTDemi.otf");
+}
+
+
+@font-face {
+    font-family: "FuturaBold";
+    src: url("fonts/FuturaPTBold.otf");
+}
+
+
+@font-face {
+    font-family: "FuturaHeavy";
+    src: url("fonts/FuturaPTHeavy.otf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+input {
+    padding: 0;
+}
+
+#stage {
+    position: absolute;
+    background-color: #ffffff;
+}
+
+.screenBox {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    visibility: hidden;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        visibility: visible;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.anim_fadeIn {
+    animation: fadeIn .25s linear normal forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.anim_fadeOut {
+    animation: fadeOut .25s linear normal forwards;
+}
+
+#titleText {
+    width: 100%;
+    left: 0%;
+    top: 3%;
+    position: absolute;
+    font-size: 1.5rem;
+    font-family: "FuturaHeavy";
+    text-align: center;
+    color: #404040;
+    text-transform: uppercase;
+    line-height: 100%;
+}
+
+#titleSubtext {
+    width: 80%;
+    left: 10%;
+    top: 10%;
+    position: absolute;
+    font-size: 1rem;
+    font-family: "FuturaHeavy";
+    text-align: center;
+    color: #808080;
+    text-transform: uppercase;
+}
+
+#ruleBox {
+    width: 90%;
+    height: 57.5%;
+    left: 5%;
+    top: 20%;
+    position: absolute;
+    background-color: #404040;
+}
+
+#ruleTitle {
+    width: 100%;
+    left: 0%;
+    top: 4%;
+    position: absolute;
+    font-size: 1.25rem;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    line-height: 100%;
+}
+
+#ruleDesc {
+    width: 95%;
+    left: 2.5%;
+    top: 18%;
+    position: absolute;
+    font-size: .7rem;
+    font-family: "Helvetica";
+    text-align: left;
+    color: #c0c0c0;
+}
+
+#selectPilesBox {
+    width: 25%;
+    height: 10%;
+    left: 5%;
+    top: 87.5%;
+    position: absolute;
+    background-color: #404040;
+}
+
+#selectLimitBox {
+    width: 25%;
+    height: 10%;
+    left: 35%;
+    top: 87.5%;
+    position: absolute;
+    background-color: #404040;
+}
+
+.selectLabel {
+    width: 100%;
+    left: 0%;
+    top: -60%;
+    position: absolute;
+    font-size: .6rem;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #404040;
+    text-transform: uppercase;
+    line-height: 100%;
+}
+
+.selectNumber {
+    width: 100%;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.5rem;
+    position: absolute;
+}
+
+.selectMinus {
+    width: 50%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+    position: absolute;
+    background-image: url("img/button_minus.svg");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.selectPlus {
+    width: 50%;
+    height: 100%;
+    left: 50%;
+    top: 0%;
+    position: absolute;
+    background-image: url("img/button_plus.svg");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#startButton {
+    width: 30%;
+    height: 10%;
+    left: 65%;
+    top: 87.5%;
+    position: absolute;
+    background-color: #404040;
+}
+
+#startButtonText {
+    width: 100%;
+    top: 50%;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #c0c0c0;
+    font-size: 1rem;
+    position: relative;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+}
+
+#startButtonLabel {
+    width: 100%;
+    left: 0%;
+    top: -45%;
+    position: absolute;
+    font-size: .6rem;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #404040;
+    text-transform: uppercase;
+    line-height: 100%;
+}
+
+#loadingText {
+    width: 100%;
+    left: 0%;
+    top: 15%;
+    position: absolute;
+    font-size: 1.5rem;
+    font-family: "FuturaHeavy";
+    text-align: center;
+    color: #404040;
+    text-transform: uppercase;
+    line-height: 100%;
+}
+
+#loadingImage {
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+    position: absolute;
+    background-image: url(img/thinking.svg);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#moveControls {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    visibility: hidden;
+}
+
+#turnOrderControls {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    visibility: hidden;
+}
+
+#piles {
+    width: 75%;
+    height: 56.25%;
+    position: absolute;
+    left: 12.5%;
+    top: 12.5%;
+}
+
+.pile {
+    width: 45%;
+    height: 45%;
+    position: absolute;
+}
+
+.pileBG {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #e0e0e0;
+}
+
+.pileCounters {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.pileNum {
+    width: 100%;
+    top: 50%;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #000000;
+    font-size: 3rem;
+    position: relative;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+    opacity: .75;
+}
+
+.counter {
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    border-radius: 50%;
+    opacity: .5;
+}
+
+@keyframes counterOut {
+    from {
+        transform: scale(1);
+        opacity: .5;
+        visibility: visible;
+    }
+    to {
+        transform: scale(3);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.anim_counterOut {
+    animation: counterOut .5s linear normal forwards;
+}
+
+.pileSelected {
+    width: 110%;
+    height: 110%;
+    left: -5%;
+    top: -5%;
+    position: absolute;
+    background-color: #404040;
+}
+
+#moveBox {
+    width: 50%;
+    height: 15%;
+    left: 25%;
+    top: 82.5%;
+    position: absolute;
+    background-color: #808080;
+}
+
+#moveNumber {
+    width: 100%;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #ffffff;
+    font-size: 2.3rem;
+    position: absolute;
+}
+
+#moveLabel {
+    width: 100%;
+    left: 0%;
+    top: -30%;
+    position: absolute;
+    font-size: .7rem;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #404040;
+    text-transform: uppercase;
+    line-height: 100%;
+}
+
+#resetMoveButton {
+    width: 15%;
+    height: 11.25%;
+    left: 5%;
+    top: 84%;
+    position: absolute;
+    background-image: url(img/button_x.svg);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#submitMoveButton {
+    width: 15%;
+    height: 11.25%;
+    left: 80%;
+    top: 84%;
+    position: absolute;
+    background-image: url(img/button_check.svg);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#moveText {
+    width: 100%;
+    left: 0%;
+    top: 4%;
+    position: absolute;
+    font-size: .7rem;
+    font-family: "Helvetica";
+    text-align: center;
+    color: #404040;
+    line-height: 100%;
+}
+
+#turnOrderText {
+    width: 100%;
+    left: 0%;
+    top: 77.5%;
+    position: absolute;
+    font-size: .7rem;
+    font-family: "Helvetica";
+    text-align: center;
+    color: #404040;
+    line-height: 100%;
+}
+
+.orderButton {
+    width: 35%;
+    height: 10%;
+    top: 85%;
+    position: absolute;
+    background-color: #404040;
+}
+
+#orderButton1 {
+    left: 10%;
+}
+
+#orderButton2 {
+    left: 55%;
+}
+
+.orderButtonText {
+    width: 100%;
+    top: 50%;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #ffffff;
+    font-size: 1rem;
+    position: relative;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+}
+
+#endText {
+    width: 100%;
+    left: 0%;
+    top: 25%;
+    position: absolute;
+    font-size: 3rem;
+    font-family: "FuturaHeavy";
+    text-align: center;
+    color: #404040;
+    text-transform: uppercase;
+    line-height: 100%;
+}
+
+#endSubtext {
+    width: 100%;
+    left: 0%;
+    top: 42.5%;
+    position: absolute;
+    font-size: 1rem;
+    font-family: "FuturaHeavy";
+    text-align: center;
+    color: #808080;
+    text-transform: uppercase;
+    line-height: 100%;
+}
+
+#endButton {
+    width: 50%;
+    height: 15%;
+    left: 25%;
+    top: 60%;
+    position: absolute;
+    background-color: #404040;
+}
+
+#endButtonText {
+    width: 100%;
+    top: 50%;
+    font-family: "FuturaDemi";
+    text-align: center;
+    color: #ffffff;
+    font-size: 2rem;
+    position: relative;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+}

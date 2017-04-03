@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wythoff's Game</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="js/resize.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="stage" class="screen">
+        <div id="menuScreen" class="screenBox">
+            <div id="titleText">Wythoff's Game</div>
+            <div id="titleSubtext">(Generalized)</div>
+            <div id="ruleBox">
+                <div id="ruleTitle">How to Play</div>
+                <div id="ruleDesc">• Play against the computer. You and the computer take turns making moves.
+                    <br>
+                    <br> • At the start of the game, there are at least two piles of counters.
+                    <br>
+                    <br> • On your turn, choose at least one pile. Take the same number of counters from each of the piles you chose.
+                    <br>
+                    <br> • Whoever takes the last counter wins.</div>
+            </div>
+            <div id="selectPilesBox">
+                <div class="selectLabel">Number
+                    <br> of Piles</div>
+                <div class="selectNumber">2</div>
+                <div class="selectMinus"></div>
+                <div class="selectPlus"></div>
+            </div>
+            <div id="selectLimitBox">
+                <div class="selectLabel">Counters
+                    <br>per Pile</div>
+                <div class="selectNumber">10</div>
+                <div class="selectMinus"></div>
+                <div class="selectPlus"></div>
+            </div>
+            <div id="startButton">
+                <div id="startButtonText">Start
+                </div>
+                <div id="startButtonLabel">Click to Begin</div>
+            </div>
+        </div>
+        <div id="loadingScreen" class="screenBox">
+            <div id="loadingText">Preparing</div>
+            <div id="loadingImage"></div>
+        </div>
+        <div id="gameScreen" class="screenBox">
+            <div id="moveText"></div>
+            <div id="turnOrderControls">
+                <div id="turnOrderText">Decide whether to go first or second.</div>
+                <div id="orderButton1" class="orderButton">
+                    <div class="orderButtonText">First</div>
+                </div>
+                <div id="orderButton2" class="orderButton">
+                    <div class="orderButtonText">Second</div>
+                </div>
+            </div>
+            <div id="moveControls">
+                <div id="moveBox">
+                    <div id="moveLabel">Counters to Take</div>
+                    <div id="moveNumber">0</div>
+                    <div class="selectMinus"></div>
+                    <div class="selectPlus"></div>
+                </div>
+                <div id="resetMoveButton"></div>
+                <div id="submitMoveButton"></div>
+            </div>
+            <div id="piles"></div>
+        </div>
+        <div id="endScreen" class="screenBox">
+            <div id="endText">Victory</div>
+            <div id="endSubtext">2 piles, 10 counter limit</div>
+            <div id="endButton">
+                <div id="endButtonText">OK</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
