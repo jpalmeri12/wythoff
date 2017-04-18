@@ -2,7 +2,7 @@ $(window).bind('touchend', function (e) {
     console.log(e);
     e.preventDefault();
     // Add your code here. 
-    $(e.currentTarget).click();
+    $(e.target).click();
     // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
 });
 
