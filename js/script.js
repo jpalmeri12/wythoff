@@ -4,7 +4,7 @@ var menuPiles = 2;
 var menuLimit = 10;
 
 var MIN_PILES = 2;
-var MAX_PILES = 2;
+var MAX_PILES = 4;
 var MIN_LIMIT = 10;
 var MAX_LIMIT = 30;
 
@@ -242,11 +242,14 @@ function makeAIMove() {
     if (gameState.piles == 2) {
         // Try subtracting from both
         var diff = Math.abs(gameState.position[0] - gameState.position[1]);
-        var sortPos = gameState.position.slice(0).sort();
+        var sortPos = gameState.position.slice(0).sort(function (a, b) {
+            return a - b;
+        });
         var canReduceBoth = false;
         var testPos = [];
         var isLosing = false;
         var hasDiff = false;
+        // Check if in a losing position, or if it has a difference already in the set of losing positions.
         for (var i = 0; i < strat.pos.length; i++) {
             if (strat.pos[i][0] == sortPos[0] && strat.pos[i][1] == sortPos[1]) {
                 isLosing = true;
@@ -301,8 +304,64 @@ function makeAIMove() {
                 newPos[1] = losingPos[1];
             }
         }
-    } else if (gameState.piles == 3) {
-
+    } else if (gameState.piles >= 3) {
+        // Sort position
+        var thisPos = [];
+        for (var i = 0; i < gameState.position.length; i++) {
+            thisPos.push({
+                i: i,
+                p: gameState.position[i]
+            });
+        }
+        thisPos.sort(function (a, b) {
+            return a.p - b.p;
+        });
+        var sortedPos = [];
+        for (var i = 0; i < thisPos.length; i++) {
+            sortedPos.push(thisPos[i].p);
+        }
+        // Compute characteristic of the sorted position
+        var char = getCharacteristic(sortedPos);
+        var validMoves = [];
+        // Iterate over characteristic to check for valid moves
+        for (var i = 0; i < char.length; i++) {
+            // Checking table i
+            for (var j = 0; j < char[i].length; j++) {
+                // Checking item j in table i
+                var ch = char[i][j];
+                // Find the position associated with this item
+                var losingIndex = strat.table[i][ch];
+                // If the index is not -1, then a losing position exists
+                if (losingIndex != -1) {
+                    var losingPos = strat.pos[losingIndex];
+                    // Compare that position with the current position to see if it reduces or is equal to it
+                    var canReduce = true;
+                    var isEqual = true;
+                    for (var k = 0; k < sortedPos.length; k++) {
+                        if (sortedPos[k] < losingPos[k]) {
+                            canReduce = false;
+                        }
+                        if (sortedPos[k] != losingPos[k]) {
+                            isEqual = false;
+                        }
+                    }
+                    if (canReduce && !isEqual) {
+                        validMoves.push(losingPos);
+                    }
+                }
+            }
+        }
+        // If there is at least one valid move, we are in a winning position. Pick a random move
+        if (validMoves.length > 0) {
+            var move = validMoves[Math.floor(Math.random() * validMoves.length)];
+            // Find the correct permutation of the losing position that the current position reduces to
+            var toReduceTo = getReductionPermutation(gameState.position, move);
+            newPos = toReduceTo;
+        }
+        // If there are no valid moves, we are in a losing position. Do whatever
+        else {
+            newPos = takeFromRandom(gameState.position);
+        }
     }
     var numSelected = 0;
     var numTaken = 0;
@@ -620,6 +679,72 @@ function getCharacteristic(position) {
     return char;
 }
 
+// Gets the permutation of "to" that "from" can reduce to.
+function getReductionPermutation(from, to) {
+    // Get permutations of to
+    var perms = permutator(to);
+    // Iterate over all permutations; see if they can reduce
+    for (var i = 0; i < perms.length; i++) {
+        var perm = perms[i];
+        if (canDirectlyReduce(from, perm)) {
+            return perm;
+        }
+    }
+    return null;
+}
+
+// Returns true if you can take the same number from some piles in "from" to get "to", retaining order. False otherwise.
+function canDirectlyReduce(from, to) {
+    var amount = -1;
+    for (var i = 0; i < from.length; i++) {
+        var a = from[i] - to[i];
+        if (a < 0) return false;
+        if (a > 0) {
+            if (amount == -1) {
+                amount = a;
+            } else if (a != amount) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function takeFromRandom(pos) {
+    var indices = [];
+    var newPos = pos.slice(0);
+    for (var i = 0; i < pos.length; i++) {
+        indices.push(i);
+    }
+    indices = shuffle(indices);
+    for (var i=0; i<indices.length; i++) {
+        if (newPos[indices[i]] > 0) {
+            newPos[indices[i]]--;
+            return newPos;
+        }
+    }
+    return null;
+}
+
+// Returns the permutations of an array.
+function permutator(inputArr) {
+    var results = [];
+
+    function permute(arr, memo) {
+        var cur, memo = memo || [];
+        for (var i = 0; i < arr.length; i++) {
+            cur = arr.splice(i, 1);
+            if (arr.length === 0) {
+                results.push(memo.concat(cur));
+            }
+            permute(arr.slice(), memo.concat(cur));
+            arr.splice(i, 0, cur[0]);
+        }
+        return results;
+    }
+    return permute(inputArr);
+}
+
 // Prints an array's elements to the console.
 function printArray(arr) {
     for (var i = 0; i < arr.length; i++) {
@@ -637,4 +762,17 @@ function leftpad(str, len, ch) {
         str = ch + str;
     }
     return str;
+}
+
+// Shuffles an array.
+function shuffle(array) {
+    var m = array.length,
+        t, i;
+    while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+    return array;
 }
