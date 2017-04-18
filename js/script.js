@@ -39,31 +39,39 @@ $(function () {
 });
 
 function initMenuButtons() {
-    $("#selectPilesBox>.selectMinus").click(function () {
+    $(window).click(function(evt) {
+        evt.preventDefault();
+    });
+    $("#selectPilesBox>.selectMinus").click(function (evt) {
+        evt.preventDefault();
         if (menuPiles > MIN_PILES) {
             menuPiles--;
             updateMenuButtons();
         }
     });
-    $("#selectPilesBox>.selectPlus").click(function () {
+    $("#selectPilesBox>.selectPlus").click(function (evt) {
+        evt.preventDefault();
         if (menuPiles < MAX_PILES) {
             menuPiles++;
             updateMenuButtons();
         }
     });
-    $("#selectLimitBox>.selectMinus").click(function () {
+    $("#selectLimitBox>.selectMinus").click(function (evt) {
+        evt.preventDefault();
         if (menuLimit > MIN_LIMIT) {
             menuLimit -= 5;
             updateMenuButtons();
         }
     });
-    $("#selectLimitBox>.selectPlus").click(function () {
+    $("#selectLimitBox>.selectPlus").click(function (evt) {
+        evt.preventDefault();
         if (menuLimit < MAX_LIMIT) {
             menuLimit += 5;
             updateMenuButtons();
         }
     });
-    $("#startButton").click(function () {
+    $("#startButton").click(function (evt) {
+        evt.preventDefault();
         loadGame();
     });
     updateMenuButtons();
@@ -95,36 +103,36 @@ function updateMenuButtons() {
 }
 
 function initGameButtons() {
-    $("#moveBox>.selectMinus").click(function () {
+    $("#moveBox>.selectMinus").click(function (evt) {
         if (gameState.canMove) {
             gameState.moveNum--;
             updateMoveBox();
         }
 
     });
-    $("#moveBox>.selectPlus").click(function () {
+    $("#moveBox>.selectPlus").click(function (evt) {
         if (gameState.canMove) {
             gameState.moveNum++;
             updateMoveBox();
         }
     });
-    $("#resetMoveButton").click(function () {
+    $("#resetMoveButton").click(function (evt) {
         if (gameState.canMove) {
             resetMove();
         }
     });
-    $("#submitMoveButton").click(function () {
+    $("#submitMoveButton").click(function (evt) {
         if (gameState.canMove && gameState.canSubmit) {
             submitMove();
         }
     });
-    $("#orderButton1").click(function () {
+    $("#orderButton1").click(function (evt) {
         pickOrder(1);
     });
-    $("#orderButton2").click(function () {
+    $("#orderButton2").click(function (evt) {
         pickOrder(2);
     });
-    $("#endButton").click(function () {
+    $("#endButton").click(function (evt) {
         showScreen("menuScreen");
     });
 }
