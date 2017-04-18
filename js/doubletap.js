@@ -1,4 +1,4 @@
-$(window).bind('touchend', function (e) {
+$("body").bind('touchend', function (e) {
     e.preventDefault();
     // Add your code here. 
     e.currentTarget.click();
