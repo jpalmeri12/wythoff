@@ -42,6 +42,9 @@ function initMenuButtons() {
     $(window).click(function(evt) {
         evt.preventDefault();
     });
+    $(window).dblclick(function(evt) {
+        evt.preventDefault();
+    });
     $("#selectPilesBox>.selectMinus").click(function (evt) {
         evt.preventDefault();
         if (menuPiles > MIN_PILES) {
