@@ -3,7 +3,10 @@ $(window).bind('touchend', function (e) {
     // Add your code here. 
     e.currentTarget.click();
     // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
-})
+});
+$("#startButton").bind('touchend', function(e) {
+    loadGame();
+});
 
 //(function($) {
 //  var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
